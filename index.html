@@ -86,20 +86,12 @@
             }
         }
 
-        .logo-emblem {
+        /* ESTILO DO SEU ÍCONE PERSONALIZADO */
+        .custom-logo-img {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 6px 16px var(--glow-blue);
-        }
-        .logo-emblem::after {
-            content: '✦';
-            color: white;
-            font-size: 1rem;
+            object-fit: contain;
+            border-radius: 8px;
         }
 
         /* --- PAINEL DO TÍTULO FORA DA FOTO --- */
@@ -120,7 +112,7 @@
             text-align: center;
         }
 
-        /* --- PAINEL CENTRAL (AGORA SÓ COM A IMAGEM E O DOCK) --- */
+        /* --- PAINEL CENTRAL (COM A IMAGEM E O DOCK) --- */
         .hero {
             width: 92%;
             max-width: 1350px;
@@ -652,7 +644,8 @@
 
     <header>
         <div class="logo-area">
-            <div class="logo-emblem"></div>
+            <!-- COLOQUE O NOME DA SUA IMAGEM AQUI EMBAIXO (Ex: icone.png) -->
+            <img src="icone.png" alt="Logo" class="custom-logo-img">
             <span>Valhalla • Arena Kakele</span>
         </div>
     </header>
@@ -660,7 +653,7 @@
     <!-- SELO DE TÍTULO FORA DA FOTO, LOGO ACIMA -->
     <div class="tournament-badge-top">⚔️ TORNEIO OFICIAL DA GUILDA ⚔️</div>
 
-    <!-- PAINEL CENTRAL (AGORA SÓ COM A IMAGEM E OS BOTÕES NO DOCK) -->
+    <!-- PAINEL CENTRAL -->
     <section class="hero">
         <div class="hero-dock">
             <div class="dock-container">
