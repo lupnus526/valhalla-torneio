@@ -55,6 +55,74 @@
             padding-bottom: 50px;
         }
 
+        /* --- EFEITO DE PÉTALAS DE SAKURA CAINDO --- */
+        .sakura-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #ffb7c5 0%, #ff8da1 100%);
+            border-radius: 150% 0 150% 0;
+            animation: fall linear infinite, sway ease-in-out infinite;
+            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(255, 183, 197, 0.4);
+        }
+
+        @keyframes fall {
+            0% { top: -10vh; }
+            100% { top: 110vh; }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(50px) rotate(180deg); }
+        }
+
+        /* --- MOLDURA ORIENTAL NOS PAINÉIS (Cantos Estilizados) --- */
+        .hero, .info-card, .ref-card {
+            position: relative;
+        }
+
+        .hero::before, .hero::after,
+        .info-card::before, .ref-card::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: var(--accent-cyan);
+            border-style: solid;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .hero::before, .info-card::before {
+            top: 8px;
+            left: 8px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .hero::after {
+            top: 8px;
+            right: 8px;
+            border-width: 2px 2px 0 0;
+        }
+
+        .info-card:hover::before, .ref-card:hover::before {
+            border-color: var(--accent-blue);
+            width: 18px;
+            height: 18px;
+        }
+
         /* --- NAVBAR --- */
         header {
             width: 100%;
@@ -79,7 +147,6 @@
             letter-spacing: -0.3px;
         }
 
-        /* ESTILO DO SEU ÍCONE PERSONALIZADO */
         .custom-logo-img {
             width: 36px;
             height: 36px;
@@ -635,9 +702,11 @@
 </head>
 <body>
 
+    <!-- EFEITO DE PÉTALAS DE SAKURA -->
+    <div class="sakura-container" id="sakuraContainer"></div>
+
     <header>
         <div class="logo-area">
-            <!-- COLOQUE O NOME DA SUA IMAGEM AQUI EMBAIXO (Ex: icone.png) -->
             <img src="icone.png" alt="Logo" class="custom-logo-img">
             <span>Valhalla • Arena Kakele</span>
         </div>
@@ -864,6 +933,32 @@
     </div>
 
     <script>
+        // Gerador dinâmico de pétalas de Sakura caindo
+        function createSakuraPetals() {
+            const container = document.getElementById('sakuraContainer');
+            if(!container) return;
+            const petalCount = 22;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+
+                const size = Math.random() * 8 + 6;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size * 1.4}px`;
+                petal.style.left = `${Math.random() * 100}vw`;
+                
+                const fallDuration = Math.random() * 6 + 6;
+                const swayDuration = Math.random() * 3 + 2;
+                
+                petal.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
+                petal.style.animationDelay = `${Math.random() * 5}s, ${Math.random() * 2}s`;
+                
+                container.appendChild(petal);
+            }
+        }
+        window.addEventListener('load', createSakuraPetals);
+
         const rulesModal = document.getElementById('rulesModal');
         const cardRulesBtn = document.getElementById('cardRulesBtn');
         const dockBtnRules = document.getElementById('dockBtnRules');
@@ -911,7 +1006,7 @@
         ];
 
         if(sortTeamsBtn) {
-            sortTeamsBtn.appendEventListener ? null : sortTeamsBtn.addEventListener('click', () => {
+            sortTeamsBtn.addEventListener('click', () => {
                 let shuffled = [...sampleTeams].sort(() => Math.random() - 0.5);
 
                 for (let i = 0; i < 4; i++) {
