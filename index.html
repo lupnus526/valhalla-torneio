@@ -105,9 +105,8 @@
         .hero {
             width: 92%;
             max-width: 1350px;
-            min-height: 420px;
-            height: 55vh;
-            margin-top: 20px;
+            height: 480px;
+            margin-top: 24px;
             border-radius: 20px;
             position: relative;
             overflow: hidden;
@@ -115,7 +114,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 24px;
             border: 1px solid var(--border-subtle);
             box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 100px rgba(11, 26, 61, 0.8);
             background: #030712 url('torneio.jpg') center center/cover no-repeat;
@@ -125,18 +124,14 @@
             background-color: rgba(11, 19, 41, 0.88);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-hover);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.5px;
             color: var(--accent-cyan);
             box-shadow: 0 8px 20px rgba(0,0,0,0.6);
             text-align: center;
-            max-width: 90%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .hero-dock {
@@ -147,18 +142,18 @@
 
         .dock-container {
             background-color: rgba(11, 19, 41, 0.88);
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 100px;
             backdrop-filter: blur(16px);
             border: 1px solid rgba(59, 130, 246, 0.3);
             display: flex;
-            gap: 10px;
+            gap: 12px;
             box-shadow: 0 12px 30px rgba(0,0,0,0.5);
         }
 
         .dock-item {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background-color: rgba(15, 28, 63, 0.9);
             border: 1px solid var(--border-subtle);
@@ -167,7 +162,7 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
         }
 
         .dock-item:hover {
@@ -181,20 +176,20 @@
         .info-grid {
             width: 92%;
             max-width: 1350px;
-            margin-top: 20px;
+            margin-top: 24px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
 
         .info-card {
             background-color: var(--bg-surface);
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 18px;
+            padding: 20px;
             border: 1px solid var(--border-subtle);
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             position: relative;
             overflow: hidden;
             transition: all 0.35s ease;
@@ -207,20 +202,20 @@
         }
 
         .info-icon {
-            width: 44px;
-            height: 44px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--bg-card), var(--bg-deep));
             border: 1px solid var(--border-subtle);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             flex-shrink: 0;
         }
 
         .info-details h3 {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -228,7 +223,7 @@
         }
 
         .info-details .value {
-            font-size: 1.2rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--text-main);
         }
@@ -237,15 +232,15 @@
         .grid-section {
             width: 92%;
             max-width: 1350px;
-            margin-top: 20px;
+            margin-top: 24px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
 
         .ref-card {
             background-color: var(--bg-surface);
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
             border: 1px solid var(--border-subtle);
             transition: all 0.35s ease;
@@ -263,7 +258,7 @@
 
         .card-visual {
             width: 100%;
-            height: 130px;
+            height: 150px;
             background: linear-gradient(135deg, #0f1c3f 0%, #070d22 100%);
             border-bottom: 1px solid var(--border-subtle);
             display: flex;
@@ -274,27 +269,27 @@
 
         .card-badge-id {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 12px;
+            left: 12px;
             background-color: rgba(3, 7, 18, 0.7);
             backdrop-filter: blur(8px);
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 6px;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--text-muted);
             border: 1px solid var(--border-subtle);
         }
 
         .card-content {
-            padding: 16px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .card-title {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-main);
         }
@@ -303,7 +298,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
@@ -320,7 +315,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            padding: 12px;
+            padding: 16px;
         }
 
         .modal-overlay.active {
@@ -347,7 +342,7 @@
         }
 
         .modal-header {
-            padding: 16px 20px;
+            padding: 20px;
             border-bottom: 1px solid var(--border-subtle);
             display: flex;
             justify-content: space-between;
@@ -356,7 +351,7 @@
         }
 
         .modal-title {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-main);
             display: flex;
@@ -368,15 +363,15 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 0.95rem;
+            font-size: 1rem;
             flex-shrink: 0;
         }
 
@@ -387,13 +382,13 @@
         }
 
         .modal-body {
-            padding: 16px 20px;
+            padding: 20px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
@@ -402,7 +397,7 @@
             color: var(--text-main);
             font-weight: 500;
             background: rgba(59, 130, 246, 0.08);
-            padding: 12px;
+            padding: 14px;
             border-radius: 10px;
             border-left: 4px solid var(--accent-blue);
         }
@@ -415,7 +410,7 @@
 
         .rule-block h4 {
             color: var(--accent-cyan);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
         }
 
@@ -444,8 +439,8 @@
             text-align: center;
             font-weight: 600;
             color: var(--accent-blue);
-            margin-top: 4px;
-            padding-top: 10px;
+            margin-top: 6px;
+            padding-top: 12px;
             border-top: 1px solid var(--border-subtle);
         }
 
@@ -457,12 +452,12 @@
         .bracket-top-panel {
             background: linear-gradient(135deg, rgba(15, 28, 63, 0.7), rgba(11, 19, 41, 0.7));
             border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         @media(min-width: 768px) {
@@ -475,12 +470,12 @@
 
         .bracket-top-panel .info-text h4 {
             color: var(--text-main);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 2px;
         }
 
         .bracket-top-panel .info-text p {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
@@ -488,10 +483,10 @@
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
             color: white;
             border: none;
-            padding: 10px 18px;
+            padding: 10px 20px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px var(--glow-blue);
@@ -512,10 +507,431 @@
         .bracket-layout {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 20px;
             align-items: center;
         }
 
         @media(min-width: 900px) {
             .bracket-layout {
-                grid-template-columns: 1fr 1.2
+                grid-template-columns: 1fr 1.2fr 1fr;
+                gap: 24px;
+            }
+        }
+
+        .bracket-column {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .bracket-column.center {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bracket-header-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .matchup-box {
+            background: rgba(15, 28, 63, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .matchup-box:hover {
+            border-color: var(--border-hover);
+            background: rgba(15, 28, 63, 0.9);
+        }
+
+        .matchup-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+            padding-bottom: 4px;
+        }
+
+        .matchup-team-name {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .matchup-players-list {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.06);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(6, 182, 212, 0.12);
+        }
+
+        .grand-final-card {
+            background: linear-gradient(135deg, rgba(15, 28, 63, 0.95), rgba(11, 19, 41, 0.95));
+            border: 2px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 260px;
+            box-shadow: 0 0 30px var(--glow-blue);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .grand-final-card .trophy-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 4px 10px rgba(234, 179, 8, 0.4));
+        }
+
+        .grand-final-card h3 {
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .final-winner-display {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .final-winner-display .winner-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .final-winner-display .winner-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        /* Responsividade para Celulares */
+        @media (max-width: 768px) {
+            header { padding: 12px 16px; }
+            .hero { height: 380px; padding: 16px; }
+            .tournament-badge-top { font-size: 0.75rem; padding: 6px 14px; }
+            .info-grid, .grid-section { grid-template-columns: 1fr; gap: 16px; }
+            .info-card { padding: 16px; }
+            .info-details .value { font-size: 1.2rem; }
+            .modal-container { max-height: 85vh; border-radius: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-emblem"></div>
+            <span>Valhalla • Arena Kakele</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="tournament-badge-top">⚔️ TORNEIO OFICIAL DA GUILDA ⚔️</div>
+        
+        <div class="hero-dock">
+            <div class="dock-container">
+                <div class="dock-item" id="dockBtnBrackets" title="Chaves do Torneio">🛡️</div>
+                <div class="dock-item" id="dockBtnRules" title="Regras">📜</div>
+                <div class="dock-item" title="Participantes">👥</div>
+                <div class="dock-item" title="Premiação">🏆</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-grid">
+        <div class="info-card">
+            <div class="info-icon">🪙</div>
+            <div class="info-details">
+                <h3>Taxa de Inscrição</h3>
+                <div class="value" style="color: #60a5fa;">50 kkc</div>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-icon">🏆</div>
+            <div class="info-details">
+                <h3>Premiação do Campeão</h3>
+                <div class="value" style="color: #38bdf8;">700 kkc</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid-section">
+        <div class="ref-card" id="cardBracketsBtn">
+            <div class="card-visual">
+                <div class="card-badge-id">#CHAVES</div>
+                <span style="font-size: 2rem;">⚔️</span>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Chaveamento do Torneio</div>
+                <div class="card-meta-row">
+                    <span>Fases Eliminatórias</span>
+                    <span style="color: var(--accent-cyan)">Ver Chaves</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ref-card" id="cardRulesBtn">
+            <div class="card-visual">
+                <div class="card-badge-id">#REGRAS</div>
+                <span style="font-size: 2rem;">📜</span>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Regulamento da Arena</div>
+                <div class="card-meta-row">
+                    <span>Combate 3x3</span>
+                    <span style="color: var(--accent-cyan)">Ler Regras</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="bracketsModal">
+        <div class="modal-container bracket-modal-container">
+            <div class="modal-header">
+                <div class="modal-title">🛡️ Chaveamento Oficial • Arena 3x3</div>
+                <button class="modal-close" id="closeBracketsBtn">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="bracket-top-panel">
+                    <div class="info-text">
+                        <h4>Sorteio Automático das Equipes</h4>
+                        <p>Distribui aleatoriamente as equipes inscritas nas vagas oficiais.</p>
+                    </div>
+                    <button class="btn-sortear" id="sortTeamsBtn">🎲 Sortear Times</button>
+                </div>
+
+                <div class="bracket-layout">
+                    <div class="bracket-column">
+                        <div class="bracket-header-label">Chave A • Quartas</div>
+                        
+                        <div class="matchup-box">
+                            <div class="matchup-meta">
+                                <span>Confronto 01</span>
+                                <span style="color: var(--accent-cyan)">MD1</span>
+                            </div>
+                            <div class="matchup-team-name" id="name-1">Aguardando Sorteio...</div>
+                            <div class="matchup-players-list" id="players-1">Equipe 1 (Alq + 2)</div>
+                        </div>
+
+                        <div class="matchup-box">
+                            <div class="matchup-meta">
+                                <span>Confronto 02</span>
+                                <span style="color: var(--accent-cyan)">MD1</span>
+                            </div>
+                            <div class="matchup-team-name" id="name-2">Aguardando Sorteio...</div>
+                            <div class="matchup-players-list" id="players-2">Equipe 2 (Alq + 2)</div>
+                        </div>
+
+                        <div class="bracket-header-label" style="margin-top: 4px;">Semifinal A</div>
+                        <div class="matchup-box" style="background: rgba(59, 130, 246, 0.05);">
+                            <div class="matchup-meta"><span>Vencedores S1 vs S2</span></div>
+                            <div class="matchup-team-name" id="name-semi-1" style="font-size: 0.85rem; color: var(--text-muted);">Pendente</div>
+                        </div>
+                    </div>
+
+                    <div class="bracket-column center">
+                        <div class="grand-final-card">
+                            <div class="trophy-icon">🏆</div>
+                            <h3>Grande Final</h3>
+                            <div class="final-winner-display">
+                                <span class="winner-title">Disputa pelo Título</span>
+                                <span class="winner-name" id="name-final">Aguardando Finalistas</span>
+                            </div>
+                            <span style="font-size: 0.65rem; color: var(--text-muted);">Valhalla Arena 3x3</span>
+                        </div>
+                    </div>
+
+                    <div class="bracket-column">
+                        <div class="bracket-header-label">Chave B • Quartas</div>
+                        
+                        <div class="matchup-box">
+                            <div class="matchup-meta">
+                                <span>Confronto 03</span>
+                                <span style="color: var(--accent-cyan)">MD1</span>
+                            </div>
+                            <div class="matchup-team-name" id="name-3">Aguardando Sorteio...</div>
+                            <div class="matchup-players-list" id="players-3">Equipe 3 (Alq + 2)</div>
+                        </div>
+
+                        <div class="matchup-box">
+                            <div class="matchup-meta">
+                                <span>Confronto 04</span>
+                                <span style="color: var(--accent-cyan)">MD1</span>
+                            </div>
+                            <div class="matchup-team-name" id="name-4">Aguardando Sorteio...</div>
+                            <div class="matchup-players-list" id="players-4">Equipe 4 (Alq + 2)</div>
+                        </div>
+
+                        <div class="bracket-header-label" style="margin-top: 4px;">Semifinal B</div>
+                        <div class="matchup-box" style="background: rgba(59, 130, 246, 0.05);">
+                            <div class="matchup-meta"><span>Vencedores S3 vs S4</span></div>
+                            <div class="matchup-team-name" id="name-semi-2" style="font-size: 0.85rem; color: var(--text-muted);">Pendente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="rulesModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">📜 Regulamento Oficial da Arena</div>
+                <button class="modal-close" id="closeModalBtn">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="intro">Para garantir uma competição justa e organizada, todos os times inscritos deverão seguir rigorosamente as regras abaixo.</p>
+
+                <div class="rule-block">
+                    <h4>🧪 1. Composição das Equipes</h4>
+                    <ul>
+                        <li>Cada equipe deverá ser formada obrigatoriamente por 3 jogadores.</li>
+                        <li>É obrigatória a presença de pelo menos 1 Alquimista em cada equipe.</li>
+                        <li>As outras duas vagas são de classes livres.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-block">
+                    <h4>🤝 2. Respeito e Conduta</h4>
+                    <ul>
+                        <li>Postura de respeito e cordialidade com os adversários e organização.</li>
+                        <li>Não serão toleradas ofensas ou atitudes antidesportivas.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-block">
+                    <h4>🚫 3. Buffs de Fortaleza</h4>
+                    <ul>
+                        <li>Proibido o uso de qualquer buff proveniente de Fortalezas.</li>
+                        <li>O descumprimento gera desclassificação imediata.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-block">
+                    <h4>🌊 4. Elementos nos Equipamentos</h4>
+                    <ul>
+                        <li>O uso de elementos nos equipamentos/sets é opcional.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-block">
+                    <h4>⏰ 5. Horário e Presença</h4>
+                    <ul>
+                        <li>Todos os integrantes devem estar presentes no horário marcado.</li>
+                        <li>Ausência de integrantes resulta em desclassificação da equipe.</li>
+                    </ul>
+                </div>
+
+                <div class="rule-block">
+                    <h4>💰 6. Desclassificação e KKC</h4>
+                    <ul>
+                        <li>Não haverá devolução dos KKC em caso de desclassificação por ausência.</li>
+                    </ul>
+                </div>
+
+                <div class="modal-footer-note">
+                    Boa sorte a todos e que vença a melhor equipe!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rulesModal = document.getElementById('rulesModal');
+        const cardRulesBtn = document.getElementById('cardRulesBtn');
+        const dockBtnRules = document.getElementById('dockBtnRules');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openRules() {
+            rulesModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeRules() {
+            rulesModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        if(cardRulesBtn) cardRulesBtn.addEventListener('click', openRules);
+        if(dockBtnRules) dockBtnRules.addEventListener('click', openRules);
+        if(closeModalBtn) closeModalBtn.addEventListener('click', closeRules);
+        if(rulesModal) rulesModal.addEventListener('click', (e) => { if (e.target === rulesModal) closeRules(); });
+
+        const bracketsModal = document.getElementById('bracketsModal');
+        const cardBracketsBtn = document.getElementById('cardBracketsBtn');
+        const dockBtnBrackets = document.getElementById('dockBtnBrackets');
+        const closeBracketsBtn = document.getElementById('closeBracketsBtn');
+        const sortTeamsBtn = document.getElementById('sortTeamsBtn');
+
+        function openBrackets() {
+            bracketsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeBrackets() {
+            bracketsModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        if(cardBracketsBtn) cardBracketsBtn.addEventListener('click', openBrackets);
+        if(dockBtnBrackets) dockBtnBrackets.addEventListener('click', openBrackets);
+        if(closeBracketsBtn) closeBracketsBtn.addEventListener('click', closeBrackets);
+        if(bracketsModal) bracketsModal.addEventListener('click', (e) => { if (e.target === bracketsModal) closeBrackets(); });
+
+        const sampleTeams = [
+            { name: "Alquimistas de Valhalla", players: "Alquimista A • Guto • Leo" },
+            { name: "Poções Mortais", players: "Alquimista B • Pedro • João" },
+            { name: "Fúria Submarina", players: "Alquimista C • Caio • Lucas" },
+            { name: "Guardiões do Mar", players: "Alquimista D • Bruno • Mateus" }
+        ];
+
+        if(sortTeamsBtn) {
+            sortTeamsBtn.addEventListener('click', () => {
+                let shuffled = [...sampleTeams].sort(() => Math.random() - 0.5);
+
+                for (let i = 0; i < 4; i++) {
+                    const nameEl = document.getElementById(`name-${i+1}`);
+                    const playersEl = document.getElementById(`players-${i+1}`);
+                    if(nameEl) nameEl.innerText = shuffled[i].name;
+                    if(playersEl) playersEl.innerText = shuffled[i].players;
+                }
+
+                const semi1 = document.getElementById('name-semi-1');
+                const semi2 = document.getElementById('name-semi-2');
+                const finalEl = document.getElementById('name-final');
+
+                if(semi1) semi1.innerText = "Aguardando Fase";
+                if(semi2) semi2.innerText = "Aguardando Fase";
+                if(finalEl) finalEl.innerText = "Aguardando Finalistas";
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeRules();
+                closeBrackets();
+            }
+        });
+    </script>
+</body>
+</html>
