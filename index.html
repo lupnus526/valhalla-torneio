@@ -86,7 +86,7 @@
             50% { transform: translateX(50px) rotate(180deg); }
         }
 
-        /* --- MOLDURA ORIENTAL NOS PAINÉIS (Cantos Estilizados) --- */
+        /* --- MOLDURA ORIENTAL NOS PAINÉIS (Cantos Estilizados internos) --- */
         .hero, .info-card, .ref-card {
             position: relative;
         }
@@ -95,8 +95,8 @@
         .info-card::before, .ref-card::before {
             content: '';
             position: absolute;
-            width: 14px;
-            height: 14px;
+            width: 10px;
+            height: 10px;
             border-color: var(--accent-cyan);
             border-style: solid;
             pointer-events: none;
@@ -105,7 +105,7 @@
             transition: all 0.3s ease;
         }
 
-        .hero::before, .info-card::before {
+        .hero::before, .info-card::before, .ref-card::before {
             top: 8px;
             left: 8px;
             border-width: 2px 0 0 2px;
@@ -119,8 +119,8 @@
 
         .info-card:hover::before, .ref-card:hover::before {
             border-color: var(--accent-blue);
-            width: 18px;
-            height: 18px;
+            width: 12px;
+            height: 12px;
         }
 
         /* --- NAVBAR --- */
