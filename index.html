@@ -63,7 +63,7 @@
             border-bottom: 1px solid var(--border-subtle);
             padding: 16px 24px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             position: sticky;
             top: 0;
@@ -77,13 +77,6 @@
             font-weight: 700;
             font-size: 1.05rem;
             letter-spacing: -0.3px;
-            margin: 0 auto;
-        }
-
-        @media(min-width: 768px) {
-            .logo-area {
-                margin: 0;
-            }
         }
 
         /* ESTILO DO SEU ÍCONE PERSONALIZADO */
@@ -918,7 +911,7 @@
         ];
 
         if(sortTeamsBtn) {
-            sortTeamsBtn.addEventListener('click', () => {
+            sortTeamsBtn.appendEventListener ? null : sortTeamsBtn.addEventListener('click', () => {
                 let shuffled = [...sampleTeams].sort(() => Math.random() - 0.5);
 
                 for (let i = 0; i < 4; i++) {
