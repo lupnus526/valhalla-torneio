@@ -50,7 +50,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-y: auto; /* Garante a rolagem da página */
+            overflow-y: auto;
             overflow-x: hidden;
             padding-bottom: 50px;
         }
@@ -102,18 +102,36 @@
             font-size: 1rem;
         }
 
-        /* --- PAINEL CENTRAL CORRIGIDO --- */
+        /* --- PAINEL DO TÍTULO FORA DA FOTO --- */
+        .tournament-badge-top {
+            width: 92%;
+            max-width: 1350px;
+            margin-top: 24px;
+            background-color: var(--bg-surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-hover);
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--accent-cyan);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        /* --- PAINEL CENTRAL (AGORA SÓ COM A IMAGEM E O DOCK) --- */
         .hero {
             width: 92%;
             max-width: 1350px;
             height: 480px;
-            margin-top: 24px;
+            margin-top: 16px;
             border-radius: 20px;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 24px;
             border: 1px solid var(--border-subtle);
@@ -124,20 +142,6 @@
             background-size: cover;
             background-repeat: no-repeat;
             flex-shrink: 0;
-        }
-
-        .tournament-badge-top {
-            background-color: rgba(11, 19, 41, 0.88);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-hover);
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--accent-cyan);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            text-align: center;
         }
 
         .hero-dock {
@@ -636,7 +640,7 @@
         @media (max-width: 768px) {
             header { padding: 12px 16px; }
             .hero { height: 320px; padding: 16px; }
-            .tournament-badge-top { font-size: 0.75rem; padding: 6px 14px; }
+            .tournament-badge-top { font-size: 0.8rem; padding: 10px 16px; }
             .info-grid, .grid-section { grid-template-columns: 1fr; gap: 16px; }
             .info-card { padding: 16px; }
             .info-details .value { font-size: 1.2rem; }
@@ -653,10 +657,11 @@
         </div>
     </header>
 
-    <!-- PAINEL CENTRAL (Com a nova imagem ajustada) -->
+    <!-- SELO DE TÍTULO FORA DA FOTO, LOGO ACIMA -->
+    <div class="tournament-badge-top">⚔️ TORNEIO OFICIAL DA GUILDA ⚔️</div>
+
+    <!-- PAINEL CENTRAL (AGORA SÓ COM A IMAGEM E OS BOTÕES NO DOCK) -->
     <section class="hero">
-        <div class="tournament-badge-top">⚔️ TORNEIO OFICIAL DA GUILDA ⚔️</div>
-        
         <div class="hero-dock">
             <div class="dock-container">
                 <div class="dock-item" id="dockBtnBrackets" title="Chaves do Torneio">🛡️</div>
