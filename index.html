@@ -1,125 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valhalla • Arena Kakele</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* --- POP-UP SUPERIOR MODERNO --- */
-        .top-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, rgba(6,182,212,0.15), rgba(59,130,246,0.25));
-            border-bottom: 1px solid rgba(6, 182, 212, 0.4);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-        .top-banner span {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #f8fafc;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-
-        /* --- LUZ DE ALERTA NO BOTÃO DE INSCRIÇÃO --- */
-        .btn-inscricao-alerta {
-            position: relative;
-            background: linear-gradient(135deg, #06b6d4, #3b82f6);
-            border: none;
-            padding: 16px 24px;
-            border-radius: 12px;
-            color: #020610;
-            font-weight: 800;
-            font-size: 1.1rem;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
-            animation: glowButton 2s infinite alternate;
-            margin-top: 15px;
-            text-align: center;
-            display: block;
-            text-decoration: none;
-        }
-        @keyframes glowButton {
-            0% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.4), inset 0 0 5px rgba(255,255,255,0.3); }
-            100% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.9), inset 0 0 12px rgba(255,255,255,0.7); }
-        }
-        .badge-valor {
-            display: inline-block;
-            background: #ef4444;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            margin-left: 8px;
-            animation: blinkBadge 1s infinite alternate;
-        }
-        @keyframes blinkBadge {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- BANNER SUPERIOR -->
-    <div class="top-banner">
-        <span><div class="pulse-dot"></div> 🔥 INSCRIÇÕES ABERTAS - VALHALLA ARENA KAKELE!</span>
-    </div>
-
-    <!-- SEU CONTEÚDO ORIGINAL -->
-    <div style="margin-top: 50px; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px;">
-        
-        <header style="text-align: center; margin-bottom: 20px;">
-            <h1 style="color: #06b6d4; font-size: 1.8rem;">Valhalla • Arena Kakele</h1>
-        </header>
-
-        <!-- CARD DE INSCRIÇÃO COM LUZ DE ALERTA -->
-        <div style="background: #070e22; border: 1px solid rgba(6,182,212,0.2); border-radius: 16px; padding: 25px; width: 100%; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-            <h3 style="color: #fff; text-align: center; margin-bottom: 10px;">⚔️ Garanta a Vaga da sua Equipe</h3>
-            
-            <a href="#" onclick="alert('Formulário de inscrição em breve!'); return false;" class="btn-inscricao-alerta">
-                ⚡ Inscrever Equipe <span class="badge-valor">Taxa: 50kkc</span>
-            </a>
-        </div>
-
-        <!-- CARD DE CHAVES DO TORNEIO (FIREBASE) -->
-        <div style="background: #070e22; border: 1px solid rgba(6,182,212,0.2); border-radius: 16px; padding: 25px; width: 100%; max-width: 600px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-            <h3 style="color: #06b6d4; margin-bottom: 15px; font-size: 1.2rem;">🏆 Chaves e Confrontos Oficiais</h3>
-            <div id="publicBracket" style="background: #0c1635; padding: 15px; border-radius: 10px; font-family: monospace; color: #fff; min-height: 80px;">
-                Carregando chaves...
-            </div>
-        </div>
-
-    </div>
-
-    <!-- FIREBASE PARA PUXAR AS CHAVES DO PAINEL ADM -->
-    <script type="module">
+<script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB9899Lz-E1vzjM2HEbqxbau3Yd_-SDRo",
@@ -133,19 +14,71 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        async function carregarChaves() {
+        const SENHA_SECRETA = "valhalla123";
+
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === SENHA_SECRETA) {
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                carregarDadosAdmin();
+            } else {
+                alert('Senha incorreta!');
+            }
+        });
+
+        async function carregarDadosAdmin() {
+            const tbody = document.getElementById('inscricoesList');
             try {
-                const docSnap = await getDoc(doc(db, "config", "chaves"));
-                if (docSnap.exists()) {
-                    document.getElementById('publicBracket').textContent = docSnap.data().texto;
-                } else {
-                    document.getElementById('publicBracket').textContent = "As chaves ainda não foram publicadas pelo ADM.";
+                const querySnapshot = await getDocs(collection(db, "inscricoes"));
+                tbody.innerHTML = '';
+                let total = 0;
+
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    total++;
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${data.data || '-'}</td><td style="color:#60a5fa; font-weight:700;">${data.lider}</td><td>${data.equipe}</td>`;
+                    tbody.appendChild(tr);
+                });
+                document.getElementById('totalCount').textContent = total;
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="3" style="color:red;">Erro ao carregar inscrições: ${e.message}</td></tr>`;
+            }
+
+            try {
+                const bracketDoc = await getDoc(doc(db, "config", "chaves"));
+                if (bracketDoc.exists()) {
+                    document.getElementById('bracketData').value = bracketDoc.data().texto || '';
                 }
             } catch (e) {
-                document.getElementById('publicBracket').textContent = "Aguardando publicação...";
+                console.log("Nenhuma chave salva ainda.");
             }
         }
-        carregarChaves();
+
+        document.getElementById('saveBracketBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('saveBracketBtn');
+            const textoChaves = document.getElementById('bracketData').value;
+            
+            if (!textoChaves.trim()) {
+                alert('Digite algo nas chaves antes de salvar!');
+                return;
+            }
+
+            btn.textContent = 'Salvando no Firebase...';
+            btn.disabled = true;
+
+            try {
+                await setDoc(doc(db, "config", "chaves"), {
+                    texto: textoChaves,
+                    atualizadoEm: new Date().toLocaleString('pt-BR')
+                });
+                alert('✅ Chaves publicadas com sucesso! Atualize o site principal para ver.');
+            } catch (e) {
+                alert('❌ Erro ao salvar chaves: ' + e.message);
+            } finally {
+                btn.textContent = '💾 Salvar e Publicar Chaves no Site';
+                btn.disabled = false;
+            }
+        });
     </script>
-</body>
-</html>
