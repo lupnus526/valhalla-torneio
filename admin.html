@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel ADM • Torneio Valhalla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020610;
+            --bg-surface: #070e22;
+            --bg-card: #0c1635;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-subtle: rgba(6, 182, 212, 0.18);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-deep); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        
+        .login-box, .admin-panel { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 30px; width: 100%; max-width: 900px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+        .admin-panel { display: none; }
+        
+        h2 { color: var(--accent-cyan); margin-bottom: 20px; font-size: 1.5rem; }
+        h3 { color: var(--text-main); margin: 20px 0 10px 0; font-size: 1.1rem; }
+        input, textarea { width: 100%; padding: 12px; background: rgba(2,6,16,0.8); border: 1px solid var(--border-subtle); border-radius: 10px; color: white; margin-bottom: 12px; outline: none; font-size: 0.95rem; }
+        button { background: var(--accent-cyan); color: var(--bg-deep); border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; }
+        button:hover { background: var(--accent-blue); color: white; }
+        
+        .stats-card { background: var(--bg-card); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700; border: 1px solid var(--border-subtle); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 25px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-subtle); font-size: 0.9rem; }
+        th { color: var(--accent-cyan); }
+        
+        .section-divider { border: 0; height: 1px; background: var(--border-subtle); margin: 30px 0; }
+        .bracket-builder { background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border-subtle); }
+    </style>
+</head>
+<body>
+
+    <div class="login-box" id="loginBox">
+        <h2>🔒 Painel Restrito - ADM</h2>
+        <input type="password" id="adminPassword" placeholder="Digite a senha de acesso">
+        <button id="loginBtn">Entrar</button>
+    </div>
+
+    <div class="admin-panel" id="adminPanel">
+        <h2>⚔️ Gerenciamento do Torneio</h2>
+        
+        <div class="stats-card">
+            Total de Inscrições Realizadas: <span id="totalCount" style="color: var(--accent-cyan);">0</span>
+        </div>
+
+        <h3>📋 Lista de Inscritos (Via Site)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Líder / Personagem</th>
+                    <th>Equipe</th>
+                </tr>
+            </thead>
+            <tbody id="inscricoesList">
+                <tr><td colspan="3">Carregando...</td></tr>
+            </tbody>
+        </table>
+
+        <hr class="section-divider">
+
+        <h3>🏆 Gerador e Publicador de Chaves</h3>
+        <div class="bracket-builder">
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">Cole os confrontos ou o formato das chaves que deseja exibir publicamente no site:</p>
+            <textarea id="bracketData" rows="5" placeholder="Ex: &#10;Quartas de Final:&#10;Time A vs Time B&#10;Time C vs Time D"></textarea>
+            <button id="saveBracketBtn">💾 Salvar e Publicar Chaves no Site</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9899Lz-E1vzjM2HEbqxbau3Yd_-SDRo",
+            authDomain: "valhalla-torneio.firebaseapp.com",
+            projectId: "valhalla-torneio",
+            storageBucket: "valhalla-torneio.firebasestorage.app",
+            messagingSenderId: "553847682466",
+            appId: "1:553847682466:web:9dcfe92cedbf1a91bdeefb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const SENHA_SECRETA = "valhalla123"; // Você pode alterar a senha aqui se quiser
+
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === SENHA_SECRETA) {
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                carregarDadosAdmin();
+            } else {
+                alert('Senha incorreta!');
+            }
+        });
+
+        async function carregarDadosAdmin() {
+            const tbody = document.getElementById('inscricoesList');
+            try {
+                const querySnapshot = await getDocs(collection(db, "inscricoes"));
+                tbody.innerHTML = '';
+                let total = 0;
+
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    total++;
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${data.data || '-'}</td><td style="color:#60a5fa; font-weight:700;">${data.lider}</td><td>${data.equipe}</td>`;
+                    tbody.appendChild(tr);
+                });
+                document.getElementById('totalCount').textContent = total;
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="3" style="color:red;">Erro ao carregar inscrições: ${e.message}</td></tr>`;
+            }
+
+            try {
+                const bracketDoc = await getDoc(doc(db, "config", "chaves"));
+                if (bracketDoc.exists()) {
+                    document.getElementById('bracketData').value = bracketDoc.data().texto || '';
+                }
+            } catch (e) {
+                console.log("Nenhuma chave salva ainda.");
+            }
+        }
+
+        document.getElementById('saveBracketBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('saveBracketBtn');
+            const textoChaves = document.getElementById('bracketData').value;
+            
+            if (!textoChaves.trim()) {
+                alert('Digite algo nas chaves antes de salvar!');
+                return;
+            }
+
+            btn.textContent = 'Salvando no Firebase...';
+            btn.disabled = true;
+
+            try {
+                await setDoc(doc(db, "config", "chaves"), {
+                    texto: textoChaves,
+                    atualizadoEm: new Date().toLocaleString('pt-BR')
+                });
+                alert('✅ Chaves publicadas com sucesso! O site principal atualizará automaticamente.');
+            } catch (e) {
+                alert('❌ Erro ao salvar chaves: ' + e.message);
+            } finally {
+                btn.textContent = '💾 Salvar e Publicar Chaves no Site';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
