@@ -110,7 +110,6 @@
             const bracketInput = document.getElementById('bracketTextInput');
 
             try {
-                // Carregar inscrições
                 const querySnapshot = await getDocs(collection(db, "inscricoes"));
                 inscritosCache = [];
                 tableBody.innerHTML = "";
@@ -135,7 +134,6 @@
                     totalBox.textContent = `Total de Inscrições Realizadas: ${count}`;
                 }
 
-                // Carregar texto atual das chaves no textarea de edição manual
                 const configSnap = await getDoc(doc(db, "config", "chaves"));
                 if (configSnap.exists() && configSnap.data().texto) {
                     bracketInput.value = configSnap.data().texto;
@@ -147,12 +145,12 @@
             }
         }
 
-        // Login
+        // Login (Senha restaurada para valhalla123)
         document.getElementById('verifyAdminPasswordBtn').addEventListener('click', () => {
             const senha = document.getElementById('adminPasswordInput').value;
-            if (senha === "valhalla2026") {
+            if (senha === "valhalla123") {
                 document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('adminSectionclassList' || 'adminSection').classList.add('active');
+                document.getElementById('adminSection').classList.add('active');
                 carregarPainelAdmin();
             } else {
                 alert('Senha incorreta!');
@@ -166,14 +164,12 @@
                 return;
             }
 
-            // Embaralhar aleatoriamente os inscritos (Fisher-Yates)
             let copia = [...inscritosCache];
             for (let i = copia.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [copia[i], copia[j]] = [copia[j], copia[i]];
             }
 
-            // Agrupar de 3 em 3
             let grupos = [];
             let grupoAtual = [];
             copia.forEach((item, index) => {
@@ -184,7 +180,6 @@
                 }
             });
 
-            // Montar o texto formatado das chaves
             let textoSorteio = "⚔️ SORTEIO OFICIAL DE TRIOS (3x3) - ARENA VALHALLA ⚔️\n\n";
             grupos.forEach((grupo, idx) => {
                 textoSorteio += `🛡️ Grupo / Chave ${idx + 1}:\n`;
@@ -194,10 +189,8 @@
                 textoSorteio += `\n`;
             });
 
-            // Jogar para o textarea para visualização do admin
             document.getElementById('bracketTextInput').value = textoSorteio;
 
-            // Salvar automaticamente no Firebase para atualizar o site principal
             try {
                 await setDoc(doc(db, "config", "chaves"), {
                     texto: textoSorteio,
