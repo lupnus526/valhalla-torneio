@@ -3,160 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel ADM • Torneio Valhalla</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Valhalla • Painel Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #020610;
-            --bg-surface: #070e22;
-            --bg-card: #0c1635;
-            --accent-cyan: #06b6d4;
-            --accent-blue: #3b82f6;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-subtle: rgba(6, 182, 212, 0.18);
+            --bg-deep: #020610; --bg-surface: #070e22; --bg-card: #0c1635;
+            --border-subtle: rgba(6, 182, 212, 0.18); --border-hover: rgba(59, 130, 246, 0.6);
+            --accent-blue: #3b82f6; --accent-cyan: #06b6d4; --text-main: #f8fafc; --text-muted: #94a3b8;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-deep); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        
-        .login-box, .admin-panel { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 30px; width: 100%; max-width: 900px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
-        .admin-panel { display: none; }
-        
-        h2 { color: var(--accent-cyan); margin-bottom: 20px; font-size: 1.5rem; }
-        h3 { color: var(--text-main); margin: 20px 0 10px 0; font-size: 1.1rem; }
-        input, textarea { width: 100%; padding: 12px; background: rgba(2,6,16,0.8); border: 1px solid var(--border-subtle); border-radius: 10px; color: white; margin-bottom: 12px; outline: none; font-size: 0.95rem; }
-        button { background: var(--accent-cyan); color: var(--bg-deep); border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; }
-        button:hover { background: var(--accent-blue); color: white; }
-        
-        .stats-card { background: var(--bg-card); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700; border: 1px solid var(--border-subtle); }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 25px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-subtle); font-size: 0.9rem; }
-        th { color: var(--accent-cyan); }
-        
-        .section-divider { border: 0; height: 1px; background: var(--border-subtle); margin: 30px 0; }
-        .bracket-builder { background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border-subtle); }
+        body { background-color: var(--bg-deep); color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
+        .admin-container { width: 100%; max-width: 900px; background: linear-gradient(135deg, #070e22, #0c1635); border-radius: 18px; padding: 25px; border: 1px solid var(--border-hover); margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; flex-direction: column; gap: 20px; }
+        .admin-container.active { display: flex; }
+        h2 { color: var(--accent-cyan); display: flex; align-items: center; gap: 10px; font-size: 1.3rem; margin-bottom: 5px; }
+        .login-box { display: flex; flex-direction: column; gap: 15px; max-width: 380px; margin: 80px auto; background: var(--bg-surface); padding: 30px; border-radius: 18px; border: 1px solid var(--border-subtle); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .login-box h2 { color: #f87171; font-size: 1.1rem; justify-content: center; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+        .form-group input, .form-group textarea { background: rgba(2, 6, 16, 0.7); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; color: var(--text-main); outline: none; width: 100%; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .btn-sorteio { background: linear-gradient(135deg, #f59e0b, #d97706); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem; }
+        .btn-save { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+        .stats-box { background: rgba(6, 182, 212, 0.05); border: 1px solid var(--border-subtle); padding: 12px 18px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; color: var(--accent-cyan); }
+        .inscritos-table-wrapper { max-height: 220px; overflow-y: auto; border: 1px solid var(--border-subtle); border-radius: 10px; background: rgba(2, 6, 16, 0.5); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
+        th { background: rgba(7, 14, 34, 0.9); padding: 10px 14px; color: var(--text-muted); font-weight: 700; position: sticky; top: 0; }
+        td { padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .back-link { display: inline-block; margin-top: 10px; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; }
+        .back-link:hover { color: var(--text-main); }
+        .divider { height: 1px; background: var(--border-subtle); width: 100%; margin: 5px 0; }
     </style>
 </head>
 <body>
 
+    <!-- TELA DE LOGIN DO ADMIN -->
     <div class="login-box" id="loginBox">
-        <h2>🔒 Painel Restrito - ADM</h2>
-        <input type="password" id="adminPassword" placeholder="Digite a senha de acesso">
-        <button id="loginBtn">Entrar</button>
+        <h2>🔒 Acesso Restrito</h2>
+        <div class="form-group">
+            <label>Senha do Administrador:</label>
+            <input type="password" id="adminPasswordInput" placeholder="Digite a senha...">
+        </div>
+        <button class="btn" id="verifyAdminPasswordBtn">Entrar no Painel</button>
+        <a href="index.html" class="back-link" style="text-align: center;">← Voltar para o Site Principal</a>
     </div>
 
-    <div class="admin-panel" id="adminPanel">
-        <h2>⚔️ Gerenciamento do Torneio</h2>
-        
-        <div class="stats-card">
-            Total de Inscrições Realizadas: <span id="totalCount" style="color: var(--accent-cyan);">0</span>
+    <!-- PAINEL DE GERENCIAMENTO -->
+    <div class="admin-container" id="adminSection">
+        <h2>⚔️ Gerenciamento do Torneio & Sorteio 3x3</h2>
+
+        <div class="stats-box" id="totalInscritosCount">Total de Inscrições Realizadas: Carregando...</div>
+
+        <div class="form-group">
+            <label>📋 Lista de Inscritos (Via Site)</label>
+            <div class="inscritos-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Líder / Personagem</th>
+                            <th>Equipe</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inscritosTableBody">
+                        <tr><td colspan="3" style="text-align: center; color: var(--text-muted);">Carregando inscritos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <h3>📋 Lista de Inscritos (Via Site)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Líder / Personagem</th>
-                    <th>Equipe</th>
-                </tr>
-            </thead>
-            <tbody id="inscricoesList">
-                <tr><td colspan="3">Carregando...</td></tr>
-            </tbody>
-        </table>
+        <div class="divider"></div>
 
-        <hr class="section-divider">
-
-        <h3>🏆 Gerador e Publicador de Chaves</h3>
-        <div class="bracket-builder">
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">Cole os confrontos ou o formato das chaves que deseja exibir publicamente no site:</p>
-            <textarea id="bracketData" rows="5" placeholder="Ex: &#10;Quartas de Final:&#10;Time A vs Time B&#10;Time C vs Time D"></textarea>
-            <button id="saveBracketBtn">💾 Salvar e Publicar Chaves no Site</button>
+        <!-- BOTÃO DE SORTEIO AUTOMÁTICO 3X3 -->
+        <div class="form-group">
+            <label>🎲 Sorteio Automático de Trios</label>
+            <button class="btn btn-sorteio" id="sortearTriosBtn">🎲 Sortear Grupos de 3 (3x3) Automaticamente & Publicar</button>
         </div>
+
+        <div class="divider"></div>
+
+        <div class="form-group">
+            <label>✏️ Editor Manual de Chaves (Caso queira ajustar algo manualmente):</label>
+            <textarea id="bracketTextInput" placeholder="Edite as chaves ou cole os confrontos aqui..."></textarea>
+        </div>
+        <button class="btn btn-save" id="saveBracketBtn">💾 Salvar e Publicar Chaves no Site</button>
+
+        <a href="index.html" class="back-link">← Ver o Site Principal / Chaveamento</a>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyB9899Lz-E1vzjM2HEbqxbau3Yd_-SDRo",
-            authDomain: "valhalla-torneio.firebaseapp.com",
-            projectId: "valhalla-torneio",
-            storageBucket: "valhalla-torneio.firebasestorage.app",
-            messagingSenderId: "553847682466",
-            appId: "1:553847682466:web:9dcfe92cedbf1a91bdeefb"
-        };
-
+        const firebaseConfig = { apiKey: "AIzaSyB9899Lz-E1vzjM2HEbqxbau3Yd_-SDRo", authDomain: "valhalla-torneio.firebaseapp.com", projectId: "valhalla-torneio", storageBucket: "valhalla-torneio.firebasestorage.app", messagingSenderId: "553847682466", appId: "1:553847682466:web:9dcfe92cedbf1a91bdeefb" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const SENHA_SECRETA = "valhalla123"; // Você pode alterar a senha aqui se quiser
+        let inscritosCache = [];
 
-        document.getElementById('loginBtn').addEventListener('click', async () => {
-            const pass = document.getElementById('adminPassword').value;
-            if (pass === SENHA_SECRETA) {
+        async function carregarPainelAdmin() {
+            const tableBody = document.getElementById('inscritosTableBody');
+            const totalBox = document.getElementById('totalInscritosCount');
+            const bracketInput = document.getElementById('bracketTextInput');
+
+            try {
+                // Carregar inscrições
+                const querySnapshot = await getDocs(collection(db, "inscricoes"));
+                inscritosCache = [];
+                tableBody.innerHTML = "";
+                
+                if (querySnapshot.empty) {
+                    totalBox.textContent = `Total de Inscrições Realizadas: 0`;
+                    tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted);">Nenhuma inscrição encontrada.</td></tr>`;
+                } else {
+                    let count = 0;
+                    querySnapshot.forEach((docSnap) => {
+                        count++;
+                        const data = docSnap.data();
+                        inscritosCache.push(data);
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${data.data || 'N/D'}</td>
+                            <td style="color: var(--accent-cyan); font-weight: 700;">${data.lider}</td>
+                            <td>${data.equipe}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                    totalBox.textContent = `Total de Inscrições Realizadas: ${count}`;
+                }
+
+                // Carregar texto atual das chaves no textarea de edição manual
+                const configSnap = await getDoc(doc(db, "config", "chaves"));
+                if (configSnap.exists() && configSnap.data().texto) {
+                    bracketInput.value = configSnap.data().texto;
+                }
+
+            } catch (e) {
+                console.error(e);
+                tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #f87171;">Erro ao carregar dados do banco.</td></tr>`;
+            }
+        }
+
+        // Login
+        document.getElementById('verifyAdminPasswordBtn').addEventListener('click', () => {
+            const senha = document.getElementById('adminPasswordInput').value;
+            if (senha === "valhalla2026") {
                 document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                carregarDadosAdmin();
+                document.getElementById('adminSectionclassList' || 'adminSection').classList.add('active');
+                carregarPainelAdmin();
             } else {
                 alert('Senha incorreta!');
             }
         });
 
-        async function carregarDadosAdmin() {
-            const tbody = document.getElementById('inscricoesList');
-            try {
-                const querySnapshot = await getDocs(collection(db, "inscricoes"));
-                tbody.innerHTML = '';
-                let total = 0;
-
-                querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    total++;
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${data.data || '-'}</td><td style="color:#60a5fa; font-weight:700;">${data.lider}</td><td>${data.equipe}</td>`;
-                    tbody.appendChild(tr);
-                });
-                document.getElementById('totalCount').textContent = total;
-            } catch (e) {
-                tbody.innerHTML = `<tr><td colspan="3" style="color:red;">Erro ao carregar inscrições: ${e.message}</td></tr>`;
-            }
-
-            try {
-                const bracketDoc = await getDoc(doc(db, "config", "chaves"));
-                if (bracketDoc.exists()) {
-                    document.getElementById('bracketData').value = bracketDoc.data().texto || '';
-                }
-            } catch (e) {
-                console.log("Nenhuma chave salva ainda.");
-            }
-        }
-
-        document.getElementById('saveBracketBtn').addEventListener('click', async () => {
-            const btn = document.getElementById('saveBracketBtn');
-            const textoChaves = document.getElementById('bracketData').value;
-            
-            if (!textoChaves.trim()) {
-                alert('Digite algo nas chaves antes de salvar!');
+        // Botão de Sortear Automático 3x3
+        document.getElementById('sortearTriosBtn').addEventListener('click', async () => {
+            if (inscritosCache.length === 0) {
+                alert('Não há inscrições suficientes no banco de dados para realizar o sorteio.');
                 return;
             }
 
-            btn.textContent = 'Salvando no Firebase...';
-            btn.disabled = true;
+            // Embaralhar aleatoriamente os inscritos (Fisher-Yates)
+            let copia = [...inscritosCache];
+            for (let i = copia.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+            }
 
+            // Agrupar de 3 em 3
+            let grupos = [];
+            let grupoAtual = [];
+            copia.forEach((item, index) => {
+                grupoAtual.push(`Líder: ${item.lider} (Equipe: ${item.equipe})`);
+                if (grupoAtual.length === 3 || index === copia.length - 1) {
+                    grupos.push([...grupoAtual]);
+                    grupoAtual = [];
+                }
+            });
+
+            // Montar o texto formatado das chaves
+            let textoSorteio = "⚔️ SORTEIO OFICIAL DE TRIOS (3x3) - ARENA VALHALLA ⚔️\n\n";
+            grupos.forEach((grupo, idx) => {
+                textoSorteio += `🛡️ Grupo / Chave ${idx + 1}:\n`;
+                grupo.forEach((membro, mIdx) => {
+                    textoSorteio += `   ${mIdx + 1}. ${membro}\n`;
+                });
+                textoSorteio += `\n`;
+            });
+
+            // Jogar para o textarea para visualização do admin
+            document.getElementById('bracketTextInput').value = textoSorteio;
+
+            // Salvar automaticamente no Firebase para atualizar o site principal
             try {
                 await setDoc(doc(db, "config", "chaves"), {
-                    texto: textoChaves,
+                    texto: textoSorteio,
                     atualizadoEm: new Date().toLocaleString('pt-BR')
                 });
-                alert('✅ Chaves publicadas com sucesso! O site principal atualizará automaticamente.');
+                alert('🎲 Sorteio 3x3 realizado e publicado com sucesso no site principal!');
             } catch (e) {
-                alert('❌ Erro ao salvar chaves: ' + e.message);
-            } finally {
-                btn.textContent = '💾 Salvar e Publicar Chaves no Site';
-                btn.disabled = false;
+                alert('Erro ao publicar o sorteio: ' + e.message);
+            }
+        });
+
+        // Botão de salvar alterações manuais
+        document.getElementById('saveBracketBtn').addEventListener('click', async () => {
+            const novoTexto = document.getElementById('bracketTextInput').value;
+            try {
+                await setDoc(doc(db, "config", "chaves"), {
+                    texto: novoTexto,
+                    atualizadoEm: new Date().toLocaleString('pt-BR')
+                });
+                alert('💾 Chaves salvas e atualizadas com sucesso no site principal!');
+            } catch (e) {
+                alert('Erro ao salvar: ' + e.message);
             }
         });
     </script>
