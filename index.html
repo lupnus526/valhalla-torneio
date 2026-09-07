@@ -3,24 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valhalla • Torneio Arena Kakele</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Valhalla • Arena Kakele</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --bg-deep: #020610;
-            --bg-surface: #070e22;
-            --bg-card: #0c1635;
-            --accent-cyan: #06b6d4;
-            --accent-blue: #3b82f6;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-subtle: rgba(6, 182, 212, 0.18);
-            --border-hover: rgba(59, 130, 246, 0.6);
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-deep); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-top: 70px; }
-
         /* --- POP-UP SUPERIOR MODERNO --- */
         .top-banner {
             position: fixed;
@@ -28,25 +13,19 @@
             left: 0;
             width: 100%;
             background: linear-gradient(90deg, rgba(6,182,212,0.15), rgba(59,130,246,0.25));
-            border-bottom: 1px solid var(--accent-cyan);
-            padding: 12px 20px;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.4);
+            padding: 10px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 15px;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            animation: slideDown 0.5s ease-out;
-            box-shadow: 0 4px 20px rgba(6,182,212,0.2);
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
         }
         .top-banner span {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            color: var(--text-main);
+            color: #f8fafc;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -64,117 +43,80 @@
             70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
-        .banner-btn {
-            background: var(--accent-cyan);
-            color: var(--bg-deep);
+
+        /* --- LUZ DE ALERTA NO BOTÃO DE INSCRIÇÃO --- */
+        .btn-inscricao-alerta {
+            position: relative;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
             border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-        }
-        .banner-btn:hover { background: white; color: var(--bg-deep); }
-
-        /* --- CONTEÚDO PRINCIPAL --- */
-        .container {
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-
-        h1 { color: var(--accent-cyan); font-size: 1.8rem; text-align: center; margin-bottom: 10px; }
-        p.subtitle { color: var(--text-muted); text-align: center; margin-bottom: 25px; font-size: 0.95rem; }
-
-        /* Estilo do Relógio no Botão */
-        .live-clock {
-            display: block;
-            font-size: 0.75rem;
-            opacity: 0.85;
-            font-weight: 500;
-            margin-top: 3px;
-        }
-
-        button.inscricao-btn {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: var(--bg-deep);
-            border: none;
-            padding: 15px;
+            padding: 16px 24px;
             border-radius: 12px;
+            color: #020610;
             font-weight: 800;
             font-size: 1.1rem;
             cursor: pointer;
             width: 100%;
-            transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(6,182,212,0.4);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+            animation: glowButton 2s infinite alternate;
+            margin-top: 15px;
             text-align: center;
+            display: block;
+            text-decoration: none;
         }
-        button.inscricao-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59,130,246,0.6);
+        @keyframes glowButton {
+            0% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.4), inset 0 0 5px rgba(255,255,255,0.3); }
+            100% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.9), inset 0 0 12px rgba(255,255,255,0.7); }
+        }
+        .badge-valor {
+            display: inline-block;
+            background: #ef4444;
             color: white;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+            animation: blinkBadge 1s infinite alternate;
         }
-
-        /* Seção de Chaves públicas sincronizadas */
-        .bracket-display {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 20px;
-            white-space: pre-wrap;
-            color: var(--text-main);
-            font-family: monospace;
-            font-size: 1rem;
-            min-height: 120px;
+        @keyframes blinkBadge {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; transform: scale(1.05); }
         }
     </style>
 </head>
 <body>
 
-    <!-- POP-UP SUPERIOR MODERNO -->
+    <!-- BANNER SUPERIOR -->
     <div class="top-banner">
-        <span><div class="pulse-dot"></div> 🔥 INSCRIÇÕES ABERTAS PARA O TORNEIO VALHALLA!</span>
-        <a href="#secao-inscricao" class="banner-btn">Inscrever-se</a>
+        <span><div class="pulse-dot"></div> 🔥 INSCRIÇÕES ABERTAS - VALHALLA ARENA KAKELE!</span>
     </div>
 
-    <div class="container" style="margin-top: 20px;">
+    <!-- SEU CONTEÚDO ORIGINAL -->
+    <div style="margin-top: 50px; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px;">
         
-        <!-- CARD DE APRESENTAÇÃO E INSCRIÇÃO -->
-        <div class="card" id="secao-inscricao">
-            <h1>⚔️ Torneio Arena Kakele</h1>
-            <p class="subtitle">Prepare sua guilda e entre para a glória eterna.</p>
+        <header style="text-align: center; margin-bottom: 20px;">
+            <h1 style="color: #06b6d4; font-size: 1.8rem;">Valhalla • Arena Kakele</h1>
+        </header>
+
+        <!-- CARD DE INSCRIÇÃO COM LUZ DE ALERTA -->
+        <div style="background: #070e22; border: 1px solid rgba(6,182,212,0.2); border-radius: 16px; padding: 25px; width: 100%; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h3 style="color: #fff; text-align: center; margin-bottom: 10px;">⚔️ Garanta a Vaga da sua Equipe</h3>
             
-            <!-- Botão com Relógio Dinâmico integrado -->
-            <button class="inscricao-btn" onclick="alert('Sistema de formulário de inscrição em breve!')">
-                ⚡ Realizar Inscrição da Equipe
-                <span class="live-clock" id="liveClock">Carregando horário...</span>
-            </button>
+            <a href="#" onclick="alert('Formulário de inscrição em breve!'); return false;" class="btn-inscricao-alerta">
+                ⚡ Inscrever Equipe <span class="badge-valor">Taxa: 50kkc</span>
+            </a>
         </div>
 
-        <!-- CARD DE CHAVES DO TORNEIO (Puxando do Firebase) -->
-        <div class="card">
-            <h2 style="color: var(--accent-cyan); font-size: 1.3rem; margin-bottom: 15px;">🏆 Chaves e Confrontos Oficiais</h2>
-            <div class="bracket-display" id="publicBracket">
-                Carregando chaves publicadas pelo administrador...
+        <!-- CARD DE CHAVES DO TORNEIO (FIREBASE) -->
+        <div style="background: #070e22; border: 1px solid rgba(6,182,212,0.2); border-radius: 16px; padding: 25px; width: 100%; max-width: 600px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h3 style="color: #06b6d4; margin-bottom: 15px; font-size: 1.2rem;">🏆 Chaves e Confrontos Oficiais</h3>
+            <div id="publicBracket" style="background: #0c1635; padding: 15px; border-radius: 10px; font-family: monospace; color: #fff; min-height: 80px;">
+                Carregando chaves...
             </div>
         </div>
 
     </div>
 
-    <!-- SCRIPT DE SINCRONIZAÇÃO COM O FIREBASE E RELÓGIO -->
+    <!-- FIREBASE PARA PUXAR AS CHAVES DO PAINEL ADM -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -191,32 +133,19 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Atualizar Relógio em tempo real no botão
-        function atualizarRelogio() {
-            const agora = new Date();
-            const horas = String(agora.getHours()).padStart(2, '0');
-            const minutos = String(agora.getMinutes()).padStart(2, '0');
-            const segundos = String(agora.getSeconds()).padStart(2, '0');
-            const dataStr = agora.toLocaleDateString('pt-BR');
-            document.getElementById('liveClock').textContent = `🕒 ${dataStr} - ${horas}:${minutos}:${segundos}`;
-        }
-        setInterval(atualizarRelogio, 1000);
-        atualizarRelogio();
-
-        // Buscar Chaves publicadas no painel ADM
-        async function carregarChavesPublicas() {
+        async function carregarChaves() {
             try {
-                const bracketDoc = await getDoc(doc(db, "config", "chaves"));
-                if (bracketDoc.exists()) {
-                    document.getElementById('publicBracket').textContent = bracketDoc.data().texto;
+                const docSnap = await getDoc(doc(db, "config", "chaves"));
+                if (docSnap.exists()) {
+                    document.getElementById('publicBracket').textContent = docSnap.data().texto;
                 } else {
-                    document.getElementById('publicBracketculus').textContent = "As chaves ainda não foram divulgadas pelo ADM.";
+                    document.getElementById('publicBracket').textContent = "As chaves ainda não foram publicadas pelo ADM.";
                 }
             } catch (e) {
-                document.getElementById('publicBracket').textContent = "Aguardando publicação das chaves...";
+                document.getElementById('publicBracket').textContent = "Aguardando publicação...";
             }
         }
-        carregarChavesPublicas();
+        carregarChaves();
     </script>
 </body>
 </html>
